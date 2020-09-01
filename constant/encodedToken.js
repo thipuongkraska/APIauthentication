@@ -1,15 +1,10 @@
 const jwt = require("jsonwebtoken");
-// const env = require("../config/env");
-// const {secretKey} = env;
+const env = require("../config/env");
+const {secretKey} = env;
 
-const encodedToken = (header, payload, secret) => {
-  const headerEncode = base64urlEncode(header);
-  const payloadEncode = base64urlEncode(payload);
-  const data = headerEncode + "." + payloadEncode;
-  const hashData = Hash(data, secret);
-  const signature = base64urlEncode(hashData);
-
-  return headerEncode + "." + payloadEncode + "." + signature;
+const encodedToken = (data) => {
+  const token = jwt.sign(data, secretKey, { expiresIn: '1h' });
+  return token;
 };
 
 module.exports = encodedToken;

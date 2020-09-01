@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-// const bodyParser = require("body-parser");
 
 const clientSchema = new mongoose.Schema({
   method: {
@@ -11,7 +10,10 @@ const clientSchema = new mongoose.Schema({
   username: String,
 
   local: {
-    email: String,
+    email: {
+      type: String,
+      unique: true,
+    },
     password: String,
   },
 
@@ -25,7 +27,7 @@ const clientSchema = new mongoose.Schema({
     password: String,
   },
 });
-////// chu y req.body.password
+////// DO IN CONTROLLER
 // clientSchema.pre("save", async (next) => {
 //   this.local.password = await bcrypt.hash(req.body.password, 12);
 //   next();
