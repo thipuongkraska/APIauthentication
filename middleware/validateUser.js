@@ -7,7 +7,6 @@ const validateUser = (schema) => { return function (req,res,next)
     if (error) {
       console.log(error);
       throw new HttpError("Invalid",401);
-      // res.send("Invalid");
     };
 
     if(!req.value) {
@@ -15,6 +14,7 @@ const validateUser = (schema) => { return function (req,res,next)
     };
     if(!req.value.body) {
       req.value.body = value;
+      console.log(value);
     };
 
     next();
